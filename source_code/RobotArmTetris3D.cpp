@@ -102,25 +102,25 @@ color4 colors[NumVertices];
 /******************************************/
 
 point4 vertices[8] = {
-    point4( -0.5, -0.5,  0.5, 1.0 ),
-    point4( -0.5,  0.5,  0.5, 1.0 ),
-    point4(  0.5,  0.5,  0.5, 1.0 ),
-    point4(  0.5, -0.5,  0.5, 1.0 ),
-    point4( -0.5, -0.5, -0.5, 1.0 ),
-    point4( -0.5,  0.5, -0.5, 1.0 ),
-    point4(  0.5,  0.5, -0.5, 1.0 ),
-    point4(  0.5, -0.5, -0.5, 1.0 )
+	point4( -0.5, -0.5,  0.5, 1.0 ),
+	point4( -0.5,  0.5,  0.5, 1.0 ),
+	point4(  0.5,  0.5,  0.5, 1.0 ),
+	point4(  0.5, -0.5,  0.5, 1.0 ),
+	point4( -0.5, -0.5, -0.5, 1.0 ),
+	point4( -0.5,  0.5, -0.5, 1.0 ),
+	point4(  0.5,  0.5, -0.5, 1.0 ),
+	point4(  0.5, -0.5, -0.5, 1.0 )
 };
 
 color4 vertex_colors[8] = {
-    color4( 0.0, 0.5, 0.9, 1.0 ),
-    color4( 0.0, 0.7, 0.8, 1.0 ),
-    color4( 0.0, 0.6, 0.9, 1.0 ),
-    color4( 0.0, 0.9, 0.9, 1.0 ),
-    color4( 0.0, 0.8, 0.9, 1.0 ),
-    color4( 0.0, 0.5, 0.8, 1.0 ),
-    color4( 0.0, 0.6, 0.8, 1.0 ),
-    color4( 0.0, 0.7, 0.9, 1.0 )
+	color4( 0.0, 0.5, 0.9, 1.0 ),
+	color4( 0.0, 0.7, 0.8, 1.0 ),
+	color4( 0.0, 0.6, 0.9, 1.0 ),
+	color4( 0.0, 0.9, 0.9, 1.0 ),
+	color4( 0.0, 0.8, 0.9, 1.0 ),
+	color4( 0.0, 0.5, 0.8, 1.0 ),
+	color4( 0.0, 0.6, 0.8, 1.0 ),
+	color4( 0.0, 0.7, 0.9, 1.0 )
 };
 
 // Parameters controlling the size of the Robot's arm
@@ -146,55 +146,55 @@ int Index = 0;
 
 void quad( int a, int b, int c, int d )
 {
-    colors[Index] = vertex_colors[a]; points[Index] = vertices[a]; Index++;
-    colors[Index] = vertex_colors[a]; points[Index] = vertices[b]; Index++;
-    colors[Index] = vertex_colors[a]; points[Index] = vertices[c]; Index++;
-    colors[Index] = vertex_colors[a]; points[Index] = vertices[a]; Index++;
-    colors[Index] = vertex_colors[a]; points[Index] = vertices[c]; Index++;
-    colors[Index] = vertex_colors[a]; points[Index] = vertices[d]; Index++;
+	colors[Index] = vertex_colors[a]; points[Index] = vertices[a]; Index++;
+	colors[Index] = vertex_colors[a]; points[Index] = vertices[b]; Index++;
+	colors[Index] = vertex_colors[a]; points[Index] = vertices[c]; Index++;
+	colors[Index] = vertex_colors[a]; points[Index] = vertices[a]; Index++;
+	colors[Index] = vertex_colors[a]; points[Index] = vertices[c]; Index++;
+	colors[Index] = vertex_colors[a]; points[Index] = vertices[d]; Index++;
 }
 
 void colorcube()
 {
-    quad( 1, 0, 3, 2 );
-    quad( 2, 3, 7, 6 );
-    quad( 3, 0, 4, 7 );
-    quad( 6, 5, 1, 2 );
-    quad( 4, 5, 6, 7 );
-    quad( 5, 4, 0, 1 );
+	quad( 1, 0, 3, 2 );
+	quad( 2, 3, 7, 6 );
+	quad( 3, 0, 4, 7 );
+	quad( 6, 5, 1, 2 );
+	quad( 4, 5, 6, 7 );
+	quad( 5, 4, 0, 1 );
 }
 
 void base(const mat4 &vp)
 {
-    mat4 instance = ( Translate( 0.0, 0.5 * BASE_HEIGHT, 0.0 ) *
+	mat4 instance = ( Translate( 0.0, 0.5 * BASE_HEIGHT, 0.0 ) *
 		 Scale( BASE_WIDTH,
 			BASE_HEIGHT,
 			BASE_WIDTH ) );
-
-    glUniformMatrix4fv( uniformVars, 1, GL_TRUE, vp * r_MVPmat * instance );
-    glDrawArrays( GL_TRIANGLES, 0, NumVertices );
+	
+	glUniformMatrix4fv( uniformVars, 1, GL_TRUE, vp * r_MVPmat * instance );
+	glDrawArrays( GL_TRIANGLES, 0, NumVertices );
 }
 
 void upper_arm(const mat4 &vp)
 {
-    mat4 instance = ( Translate( 0.0, 0.5 * UPPER_ARM_HEIGHT, 0.0 ) *
-		      Scale( UPPER_ARM_WIDTH,
-			     UPPER_ARM_HEIGHT,
-			     UPPER_ARM_WIDTH ) );
-
-    glUniformMatrix4fv( uniformVars, 1, GL_TRUE, vp * r_MVPmat * instance );
-    glDrawArrays( GL_TRIANGLES, 0, NumVertices );
+	mat4 instance = ( Translate( 0.0, 0.5 * UPPER_ARM_HEIGHT, 0.0 ) *
+			  Scale( UPPER_ARM_WIDTH,
+				 UPPER_ARM_HEIGHT,
+				 UPPER_ARM_WIDTH ) );
+	
+	glUniformMatrix4fv( uniformVars, 1, GL_TRUE, vp * r_MVPmat * instance );
+	glDrawArrays( GL_TRIANGLES, 0, NumVertices );
 }
 
 void lower_arm(const mat4 &vp)
 {
-    mat4 instance = ( Translate( 0.0, 0.5 * LOWER_ARM_HEIGHT, 0.0 ) *
-		      Scale( LOWER_ARM_WIDTH,
-			     LOWER_ARM_HEIGHT,
-			     LOWER_ARM_WIDTH ) );
-    
-    glUniformMatrix4fv( uniformVars, 1, GL_TRUE, vp * r_MVPmat * instance );
-    glDrawArrays( GL_TRIANGLES, 0, NumVertices );
+	mat4 instance = ( Translate( 0.0, 0.5 * LOWER_ARM_HEIGHT, 0.0 ) *
+			  Scale( LOWER_ARM_WIDTH,
+				 LOWER_ARM_HEIGHT,
+				 LOWER_ARM_WIDTH ) );
+	
+	glUniformMatrix4fv( uniformVars, 1, GL_TRUE, vp * r_MVPmat * instance );
+	glDrawArrays( GL_TRIANGLES, 0, NumVertices );
 }
 
 void initRobot( void )
