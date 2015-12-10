@@ -1,4 +1,4 @@
-# RobotArmTetris3D
+# 3D Tetris with Robot Arm
 By Ivan Jonathan Hoo (ihoo@sfu.ca)
 
 # Description
