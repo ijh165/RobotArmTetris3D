@@ -167,9 +167,9 @@ void colorcube()
 void base(const mat4 &vp)
 {
 	mat4 instance = ( Translate( 0.0, 0.5 * BASE_HEIGHT, 0.0 ) *
-		 Scale( BASE_WIDTH,
-			BASE_HEIGHT,
-			BASE_WIDTH ) );
+			  Scale( BASE_WIDTH,
+				 BASE_HEIGHT,
+				 BASE_WIDTH ) );
 	
 	glUniformMatrix4fv( uniformVars, 1, GL_TRUE, vp * r_MVPmat * instance );
 	glDrawArrays( GL_TRIANGLES, 0, NumVertices );
