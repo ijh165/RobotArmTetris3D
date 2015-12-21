@@ -2,7 +2,7 @@
 By Ivan Jonathan Hoo (ihoo@sfu.ca)
 
 # Description
-This is an interactive 3D game of Tetris using a robot arm (controlled by typical "WASD" keyboard controls) to drop the tetris block at desired location. When a row is completely filled, it is removed and the tiles above it will be moved one row down. This game is coded in C++ with OpenGL libraries.
+This is an interactive 3D game of Tetris using a robot arm (controlled by typical "WASD" keyboard controls) to drop the tetris block at the desired location. When a row is completely filled, it is removed and the tiles above it will be moved one row down. This game is coded in C++ with OpenGL libraries.
 
 # Prerequisites
 This game requires Linux OS with OpenGL libraries installed.
