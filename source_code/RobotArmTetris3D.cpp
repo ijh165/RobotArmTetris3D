@@ -487,6 +487,7 @@ void initBoard()
 	vec4 boardpoints[1200*6];
 	for (int i=0; i<1200*6; i++)
 		boardcolours[i] = emptyCellColor;
+		
 	// Each cell is a square (2 triangles with 6 vertices)
 	for (int i=0; i<20; i++)
 		for (int j=0; j<10; j++)
@@ -669,7 +670,7 @@ void display()
 	projectionMat = Perspective(45,1.0*xsize/ysize,10,200);
 
 	//draw robot arm
-    glBindVertexArray(r_vao);
+	glBindVertexArray(r_vao);
 	mat4 M = projectionMat * viewMat * Translate(r_pos);
 	r_MVPmat = RotateY(Theta[Base] );
 	base(M);
