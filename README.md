@@ -8,7 +8,7 @@ This is an interactive 3D game of Tetris using a robot arm (controlled by typica
 This game requires Linux OS with OpenGL libraries installed.
 
 # To play the game
-1. Go to "source_codes" folder (type "cd source_codes")
+1. Go to "source_code" folder (type "cd source_code")
 2. Type "make" in the terminal (ignore all warnings)
 3. Type "./RobotArmTetris3D"
 
