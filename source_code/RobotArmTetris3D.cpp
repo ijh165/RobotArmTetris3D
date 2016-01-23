@@ -63,10 +63,16 @@ vec2 tilePos = vec2(5,20-1); // The position of the current tile using grid coor
 int tileType;
 vec4 currTileColors[4];
 
-const vec2 allTileShapes[3][4] =
-	{{vec2(-2, 0), vec2(-1, 0), vec2(0,0), vec2(1,0)},  // I
-	 {vec2(-1,-1), vec2( 0,-1), vec2(0,0), vec2(1,0)},  // S
-	 {vec2(-1,-1), vec2(-1, 0), vec2(0,0), vec2(1,0)}}; // L
+const vec2 allTileShapes[7][4] =
+{
+	{vec2(-2, 0), vec2(-1, 0), vec2(0,0), vec2( 1,0)},  // I
+	{vec2(-1,-1), vec2( 0,-1), vec2(0,0), vec2(-1,0)},  // O
+	{vec2(-1, 0), vec2( 1, 0), vec2(0,0), vec2( 0,1)},  // T
+	{vec2(-1,-1), vec2( 0,-1), vec2(0,0), vec2( 1,0)},  // S
+	{vec2(-1,-1), vec2(-1, 0), vec2(0,0), vec2( 1,0)},  // L
+	{vec2( 1,-1), vec2( 0,-1), vec2(0,0), vec2(-1,0)},  // S-reverse
+	{vec2(-1, 1), vec2(-1, 0), vec2(0,0), vec2( 1,0)},  // L-reverse
+};
 
 /*===================fruit colors===================*/
 const vec4 purple = vec4(1.0,0.0,1.0,1.0);
@@ -223,7 +229,7 @@ void initRobot( void )
 
 vec2 getRobotHandCoor() //get coordinate of tile in robot hand
 {	
-	return vec2(round(r_pos.x/2+LOWER_ARM_HEIGHT * -sin(3.14159/180 * Theta[LowerArm]) + (UPPER_ARM_HEIGHT-0.5) * -cos(3.14159/180 * (90 - Theta[LowerArm] - Theta[UpperArm]))),
+	return vec2(round(r_pos.x/2 + LOWER_ARM_HEIGHT * -sin(3.14159/180 * Theta[LowerArm]) + (UPPER_ARM_HEIGHT-0.5) * -cos(3.14159/180 * (90 - Theta[LowerArm] - Theta[UpperArm]))),
 				round(r_pos.y + BASE_HEIGHT + LOWER_ARM_HEIGHT * cos(-3.14159/180* Theta[LowerArm]) + (UPPER_ARM_HEIGHT-0.5) * sin(3.14159/180 * (90 - Theta[LowerArm] - Theta[UpperArm])))
 				);
 }
@@ -289,6 +295,7 @@ void updatetile()
 {
 	if(gameOver)
 		return;
+	
 	if(!freezeTime)
 		tilePos = getRobotHandCoor();
 
@@ -323,10 +330,10 @@ void updatetile()
 
 		// Create the 4 corners of the square - these vertices are using location in pixels
 		// These vertices are later converted by the vertex shader
-		vec4 p1 = vec4(33.0 + (x * 33.0), 33.0 + (y * 33.0), 16.5, 1); // front left bottom
-		vec4 p2 = vec4(33.0 + (x * 33.0), 66.0 + (y * 33.0), 16.5, 1); // front left top
-		vec4 p3 = vec4(66.0 + (x * 33.0), 33.0 + (y * 33.0), 16.5, 1); // front right bottom
-		vec4 p4 = vec4(66.0 + (x * 33.0), 66.0 + (y * 33.0), 16.5, 1); // front right top
+		vec4 p1 = vec4(33.0 + (x * 33.0), 33.0 + (y * 33.0),  16.5, 1); // front left bottom
+		vec4 p2 = vec4(33.0 + (x * 33.0), 66.0 + (y * 33.0),  16.5, 1); // front left top
+		vec4 p3 = vec4(66.0 + (x * 33.0), 33.0 + (y * 33.0),  16.5, 1); // front right bottom
+		vec4 p4 = vec4(66.0 + (x * 33.0), 66.0 + (y * 33.0),  16.5, 1); // front right top
 		vec4 p5 = vec4(33.0 + (x * 33.0), 33.0 + (y * 33.0), -16.5, 1); // back left bottom
 		vec4 p6 = vec4(33.0 + (x * 33.0), 66.0 + (y * 33.0), -16.5, 1); // back left top
 		vec4 p7 = vec4(66.0 + (x * 33.0), 33.0 + (y * 33.0), -16.5, 1); // back right bottom
@@ -390,13 +397,13 @@ void newtile()
 
 	//update the geometry VBO of current tile
 
-	tileType=rand()%3;
+	tileType = rand()%7;
 
 	vector<int> colorIntVector; //this not the same as mathematical vector (this is C++ vector data structure)
-	for(int i=0;i<5;i++)
+	for(int i=0; i<5; i++)
 		colorIntVector.push_back(i);
 
-	for(int i = 0; i < 4; i++)
+	for(int i=0; i<4; i++)
 	{
 		//make sure each box have different colors
 		int selectedIndex = rand()%(int)(colorIntVector.size());
@@ -420,7 +427,7 @@ void newtile()
 		tile[i] = allTileShapes[tileType][i];
 	}
 
-	for(int i=0;i<rand()%5;i++) //randomize orientation
+	for(int i=0; i<rand()%5; i++) //randomize orientation
 		rotate();
 
 	updatetile();
@@ -456,7 +463,7 @@ void initGrid()
 	for (int i=0; i<21; i++)
 		for (int j=0; j<11; j++) 
 		{
-			gridpoints[128+22*i+2*j]   = vec4(33.0 + (j * 33.0), 33.0 + (i * 33.0), 16.5, 1); // front left bottom
+			gridpoints[128+22*i+2*j]   = vec4(33.0 + (j * 33.0), 33.0 + (i * 33.0),  16.5, 1); // front left bottom
 			gridpoints[128+22*i+2*j+1] = vec4(33.0 + (j * 33.0), 33.0 + (i * 33.0), -16.5, 1); // back left bottom
 		}
 
@@ -493,10 +500,10 @@ void initBoard()
 		for (int j=0; j<10; j++)
 		{
 			//Vertices of a board cell (a cube)
-			vec4 p1 = vec4(33.0 + (j * 33.0), 33.0 + (i * 33.0), 16.50, 1);
-			vec4 p2 = vec4(33.0 + (j * 33.0), 66.0 + (i * 33.0), 16.50, 1);
-			vec4 p3 = vec4(66.0 + (j * 33.0), 33.0 + (i * 33.0), 16.50, 1);
-			vec4 p4 = vec4(66.0 + (j * 33.0), 66.0 + (i * 33.0), 16.50, 1);
+			vec4 p1 = vec4(33.0 + (j * 33.0), 33.0 + (i * 33.0),  16.50, 1);
+			vec4 p2 = vec4(33.0 + (j * 33.0), 66.0 + (i * 33.0),  16.50, 1);
+			vec4 p3 = vec4(66.0 + (j * 33.0), 33.0 + (i * 33.0),  16.50, 1);
+			vec4 p4 = vec4(66.0 + (j * 33.0), 66.0 + (i * 33.0),  16.50, 1);
 			vec4 p5 = vec4(33.0 + (j * 33.0), 33.0 + (i * 33.0), -16.50, 1);
 			vec4 p6 = vec4(33.0 + (j * 33.0), 66.0 + (i * 33.0), -16.50, 1);
 			vec4 p7 = vec4(66.0 + (j * 33.0), 33.0 + (i * 33.0), -16.50, 1);
@@ -803,8 +810,8 @@ void fallingTileAuto(int data)
 	{
 		settile(tilePos);
 
-		for(int x=0;x<20;x++)
-			for(int i=0;i<20;i++)
+		for(int x=0; x<20; x++)
+			for(int i=0; i<20; i++)
 				checkfullrow(i);
 
 		newtile();
