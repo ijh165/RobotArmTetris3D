@@ -1,5 +1,5 @@
 # Robot Arm Tetris 3D
-By Ivan Jonathan Hoo (ihoo@sfu.ca)
+By Ivan Jonathan Hoo (ihoo@sfu.ca)  
 Demonstration: https://www.youtube.com/watch?v=SGEVGslZtdc
 
 # Description
