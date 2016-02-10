@@ -15,7 +15,7 @@ This is an interactive 3D game of Tetris using a robot arm (controlled by typica
 2. Go to "source_code" folder (type "cd source_code")
 3. Type "make" in the terminal (ignore all warnings)
 4. Type "./RobotArmTetris3D"
-5. If you run into errors just type "sudo ln -s /usr/lib64/libGLEW.so.1.13 /usr/lib/libGLEW.so.1.13"
+5. If you run into errors try "sudo ln -s /usr/lib64/libGLEW.so.1.13 /usr/lib/libGLEW.so.1.13" and run the program again
 
 # Controls
 - CTRL+Left_key and CTRL+Right_key to rotate camera
