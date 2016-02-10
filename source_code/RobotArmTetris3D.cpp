@@ -279,7 +279,7 @@ bool noTileBelow(const vec2 &p)
 {
 	for(int i=0; i<4; i++)
 	{
-		vec2 coor=p+tile[i];
+		vec2 coor = p + tile[i];
 		if( (int)(coor.y-1)<0 || isOccupied((int)coor.x,(int)(coor.y-1.0)) )
 			return false;
 	}
@@ -587,7 +587,7 @@ void init()
 	uniformVars = glGetUniformLocation(program, "MVPmat");
 
 	//setup camera
-	vec3 eye(0,27,24);
+	vec3 eye(0,26.5,27);
 	vec3 center(0,10,0); //Center of board height=20/2=10
 	vec3 up(0,1,0);
 	viewMat = LookAt(eye,center,up);
