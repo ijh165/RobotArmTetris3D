@@ -899,7 +899,7 @@ int main(int argc, char **argv)
 	glutInit(&argc,argv);
 	glutInitDisplayMode(GLUT_MULTISAMPLE | GLUT_DEPTH | GLUT_RGBA | GLUT_DOUBLE);
 	glutInitWindowSize(xsize,ysize);
-	glutInitWindowPosition(460,156); // (1920-1000)*0.5=460, (1080-768)*0.5=156
+	glutInitWindowPosition(0.5*(glutGet(GLUT_SCREEN_WIDTH)-xsize), 0.5*(glutGet(GLUT_SCREEN_HEIGHT)-ysize)); //center position relative to screen size
 	glutCreateWindow("3D Tetris With Robot Arm");
 	glewInit();
 	init();
